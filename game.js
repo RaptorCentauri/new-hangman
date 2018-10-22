@@ -6,28 +6,31 @@ class Hangman {
     this.words = words;
     this.lives = lives
     this.blankChar = blankChar
+    this.wrongLetters = new Set();
   }
 
 
   initializeGame = () => {
+    // this.setWrongLetters();
     this.setCurrentWord();
     this.createWordMap();
     this.setNumberOfLettersToWin();
     this.setBlankLetters();
   }
 
-  sayLives = () => {console.log(this.lives)}
-
-  sayWords = () => {console.log(this.words)}
+  // setWrongLetters = () =>{
+  //   let wrongLetters = new Set();
+  //   this.wrongLetters = wrongLetters
+  // }
 
   setCurrentWord = () => {
     let currentWord = this.words[Math.floor(Math.random()*this.words.length)]
     this.currentWord = currentWord;
   }
 
-  displayCurrentWord = () => {
-    console.log(this.currentWord);
-  }
+  // displayCurrentWord = () => {
+  //   console.log(this.currentWord);
+  // }
 
   createWordMap = () =>{
     let wordMap = new Map();
@@ -60,8 +63,7 @@ class Hangman {
       this.updateBlanks(this.wordMap.get(ltr));
       this.neededToWin--;
     } else {
-      console.log('no letter');
-      this.lives--
+      this.wrongLetters.add(ltr)
     }
 
     this.checkForGameOver()
@@ -77,33 +79,24 @@ class Hangman {
     console.log(displayBlanks);
   }
 
-
   updateBlanks = (arr) => {
     for (var i = 0; i < arr.length; i++) {
       this.blanks[arr[i]] = this.currentWord[arr[i]]
     }
   }
 
-
   setNumberOfLettersToWin = () => {
     this.neededToWin = this.wordMap.size
   }
 
-
 checkForGameOver = () => {
-  if(this.lives === 0){
+  if(this.lives === this.wrongLetters.size){
     console.log('you lose!');
   }
   if(this.neededToWin === 0){
     console.log('You win!');
   }
-  else{
-    console.log('KEEP GOING!');
-  }
 }
-
-
-
 
 }
 
@@ -111,27 +104,4 @@ let game = new Hangman(words);
 
 game.initializeGame();
 
-
-game.displayBlanks();
-console.log(game.neededToWin);
-
-game.checkForLetter('l')
-
-game.displayBlanks();
-
-game.checkForLetter('o')
-
-game.displayBlanks();
-
-game.checkForLetter('w')
-
-game.displayBlanks();
-
-game.checkForLetter('y')
-
-game.displayBlanks();
-
-game.checkForLetter('e')
-
-game.displayBlanks();
-// console.log(game.neededToWin);
+game.checkForLetter('k');
