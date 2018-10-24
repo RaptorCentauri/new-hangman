@@ -53,11 +53,8 @@ class Hangman {
       }
     }
 
-
-
     this.wordMap = wordMap
 
-    // console.log(this.wordMap);
   }
 
   /**
@@ -82,6 +79,14 @@ class Hangman {
   setBlankLetters = () => {
     let blanks = new Array(this.currentWord.length).fill(this.blankChar);
     this.blanks = blanks;
+
+    for (let [key, value] of this.wordMap) {
+        if (!/^[a-zA-Z]{1}$/.test(key)){
+          console.log(key, value);
+          blanks[value] = key;
+        }
+    }
+    console.log('blnks', this.blanks);
     this.displayBlanks();
   }
 
