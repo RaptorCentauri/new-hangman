@@ -18,6 +18,8 @@ class Hangman {
     this.setBlankLetters();
   }
 
+
+
   // setWrongLetters = () =>{
   //   let wrongLetters = new Set();
   //   this.wrongLetters = wrongLetters
@@ -58,11 +60,19 @@ class Hangman {
     // console.log(this.wordMap);
   }
 
+  /**
+  write desc before params
+  @param {string} ltr -foobare
+  */
+
   checkForLetter = (ltr) =>{
     if (this.wordMap.has(ltr)) {
+      console.log('YES');
       this.updateBlanks(this.wordMap.get(ltr));
       this.neededToWin--;
     } else {
+      console.log('NO');
+
       this.wrongLetters.add(ltr)
     }
 
@@ -72,17 +82,20 @@ class Hangman {
   setBlankLetters = () => {
     let blanks = new Array(this.currentWord.length).fill(this.blankChar);
     this.blanks = blanks;
+    this.displayBlanks();
   }
 
   displayBlanks = () => {
-    let displayBlanks = this.blanks.join("")
-    console.log(displayBlanks);
+    this.blankVisibles = this.blanks.join("")
+    // console.log(this.displayBlanks);
   }
 
   updateBlanks = (arr) => {
     for (var i = 0; i < arr.length; i++) {
       this.blanks[arr[i]] = this.currentWord[arr[i]]
     }
+
+    this.displayBlanks();
   }
 
   setNumberOfLettersToWin = () => {
@@ -98,10 +111,14 @@ checkForGameOver = () => {
   }
 }
 
+
+
 }
 
-let game = new Hangman(words);
 
-game.initializeGame();
+export default Hangman
+// let game = new Hangman(words);
 
-game.checkForLetter('k');
+// game.initializeGame();
+//
+// game.checkForLetter('k');
