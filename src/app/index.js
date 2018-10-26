@@ -1,72 +1,74 @@
 import React from 'react';
 import { render } from 'react-dom';
 import Hangman from './gameLogic/game.js'
+import Word from './components/Word.js'
+import WrongLetters from './components/WrongLetters/WrongLetters.js'
 
 // import './index.scss'
 
 class App extends React.Component {
-    game = new Hangman(['red', 'yellow', 'blue', 'orange'])
+    game = new Hangman(['Roy Harper', 'Spider-Man', 'Batman'])
 
     state = {
       blankWord: '',
-      wrongLetters: []
+      wrongLetters: [],
+      lives: 0
 
     }
 
 
-
-
   handleKeyPress = (event) => {
-
-    console.log(event);
 
     let guess = event.key;
 
-    console.log('guess', guess);
 
     if (/^[a-zA-Z]{1}$/.test(guess)){
-
-
-      console.log(`${guess} is a letter`);
-
           this.game.checkForLetter(event.key)
           this.setState({blankWord: this.game.blankVisibles})
 
 
           let wrongArr = [...this.game.wrongLetters.values()]
 
-
           this.setState({wrongLetters: wrongArr})
+
+          this.setState({lives: this.game.lives})
+          this.setState({gameOver: this.game.gameOver})
+          this.setState({wins: this.game.wins})
+          this.setState({losses: this.game.losses})
     }
-    else{
-      console.log(`${guess} is not a letter`);
-    }
+    // else{
+    //   console.log(`${guess} is not a letter`);
+    // }
 
   }
 
-  componentWillMount() {
-    console.log('Expecting a mount');
+componentWillMount() {
     this.game.initializeGame()
     console.log(this.game);
     this.setState({blankWord: this.game.blankVisibles})
-    console.log(this.game.blankVisibles);
-    // console.log(this.state);
-      // window.addEventListener('keyup', this.handleKeyPress);
-    }
-
+    this.setState({lives: this.game.lives})
+    this.setState({gameOver: this.game.gameOver})
+    this.setState({wins: this.game.wins})
+    this.setState({losses: this.game.losses})
+  }
 
 componentDidMount() {
     window.addEventListener('keyup', this.handleKeyPress);
 }
 
   render() {
-      // this.state.game.initializeGame()
-
         return (
             <div className='App'>
-              {this.state.blankWord}
+              <Word word={this.state.blankWord}/>
+              <WrongLetters wrongLetters={this.state.wrongLetters}/>
+              GUESSES LEFT: {this.state.lives}
               <br></br>
-              WRONG: {this.state.wrongLetters}
+              {this.state.gameOver ? 'GAME OVER' : 'Not Over'}
+              <br></br>
+              Wins: {this.state.wins}
+               <br></br>
+              Losses: {this.state.losses}
+
             </div>
         );
     }

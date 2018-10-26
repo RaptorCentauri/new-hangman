@@ -1,12 +1,12 @@
-// let words = ['red', 'yellow', 'blue', 'orange']
-let words = ['yellow']
-
 class Hangman {
-  constructor(words, lives=6, blankChar='*') {
+  constructor(words, lives=6, blankChar='_') {
     this.words = words;
     this.lives = lives
     this.blankChar = blankChar
     this.wrongLetters = new Set();
+    this.gameOver = false;
+    this.wins = 0;
+    this.losses = 0;
   }
 
 
@@ -19,20 +19,10 @@ class Hangman {
   }
 
 
-
-  // setWrongLetters = () =>{
-  //   let wrongLetters = new Set();
-  //   this.wrongLetters = wrongLetters
-  // }
-
   setCurrentWord = () => {
-    let currentWord = this.words[Math.floor(Math.random()*this.words.length)]
+    let currentWord = this.words[Math.floor(Math.random()*this.words.length)].toUpperCase()
     this.currentWord = currentWord;
   }
-
-  // displayCurrentWord = () => {
-  //   console.log(this.currentWord);
-  // }
 
   createWordMap = () =>{
     let wordMap = new Map();
@@ -57,20 +47,15 @@ class Hangman {
 
   }
 
-  /**
-  write desc before params
-  @param {string} ltr -foobare
-  */
-
   checkForLetter = (ltr) =>{
+    ltr = ltr.toUpperCase();
+
     if (this.wordMap.has(ltr)) {
-      console.log('YES');
       this.updateBlanks(this.wordMap.get(ltr));
       this.neededToWin--;
     } else {
-      console.log('NO');
-
       this.wrongLetters.add(ltr)
+      this.lives--;
     }
 
     this.checkForGameOver()
@@ -82,17 +67,14 @@ class Hangman {
 
     for (let [key, value] of this.wordMap) {
         if (!/^[a-zA-Z]{1}$/.test(key)){
-          console.log(key, value);
           blanks[value] = key;
         }
     }
-    console.log('blnks', this.blanks);
     this.displayBlanks();
   }
 
   displayBlanks = () => {
     this.blankVisibles = this.blanks.join("")
-    // console.log(this.displayBlanks);
   }
 
   updateBlanks = (arr) => {
@@ -108,22 +90,23 @@ class Hangman {
   }
 
 checkForGameOver = () => {
-  if(this.lives === this.wrongLetters.size){
-    console.log('you lose!');
+  if(this.lives === 0){
+    this.gameOver = true;
+    this.losses++
+    // this.gameEnd = 'You Lose!'
+    // console.log('you lose!');
   }
-  if(this.neededToWin === 0){
+  // if(this.neededToWin === 0){
+  if(this.blankVisibles === this.currentWord){
+    this.wins++
+
+    // this.gameEnd = 'You Win!'
+
     console.log('You win!');
   }
 }
-
-
 
 }
 
 
 export default Hangman
-// let game = new Hangman(words);
-
-// game.initializeGame();
-//
-// game.checkForLetter('k');
