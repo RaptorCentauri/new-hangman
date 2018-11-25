@@ -1,6 +1,11 @@
 .playWord{
-  // background-color: red
+  grid-area: word;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: green;
   color: red;
+  font-size: 6em;
   letter-spacing: 0.08em;
 
 }
