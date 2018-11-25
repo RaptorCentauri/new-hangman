@@ -4,8 +4,8 @@ import "./Score.scss"
 
 const Score = (props) =>
 <div className='score-style'>
-  WINS: {props.wins}
-  LOSSES: {props.losses}
+  <div>WINS: {props.wins}</div>
+  <div>LOSSES: {props.losses}</div>
 </div>
 
 
