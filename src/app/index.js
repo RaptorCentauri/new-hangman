@@ -4,10 +4,7 @@ import { render } from 'react-dom';
 import React from 'react';
 
 import Hangman from './gameLogic/game.js'
-import Score from './components/Score/Score';
-import Word from './components/Word.js'
-import HangmanImage from './components/HangmanImage/HangmanImage'
-import WrongLetters from './components/WrongLetters/WrongLetters.js'
+import {Score, Word, HangmanImage, WrongLetters} from './components/index.js'
 
 class App extends React.Component {
     game = new Hangman(['Roy Harper', 'Spider-Man', 'Batman'])
@@ -66,15 +63,6 @@ componentDidMount() {
               <WrongLetters wrongLetters={this.state.wrongLetters}/>
               <HangmanImage lives={this.state.lives}/>
               <Score wins={this.state.wins} losses={this.state.losses}/>
-
-              {/* GUESSES LEFT: {this.state.lives} */}
-              {/* <br></br> */}
-              {/* {this.state.gameOver ? 'GAME OVER' : 'Not Over'} */}
-              {/* <br></br> */}
-              {/* Wins: {this.state.wins} */}
-               {/* <br></br> */}
-              {/* Losses: {this.state.losses} */}
-
             </div>
         );
     }

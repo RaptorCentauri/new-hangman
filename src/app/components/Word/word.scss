@@ -1,15 +1,15 @@
+@import '../../styles/mixins/frames.scss';
+
 .playWord{
   grid-area: word;
   display: flex;
   justify-content: center;
   align-items: center;
-  // background-color: green;
   color: #21FF06;
   font-size: 6em;
   letter-spacing: 0.08em;
 
-  border-color:#21FF06;
-  border-style: solid;
-  border-radius: 30px;
+  @include frame;
+
 
 }

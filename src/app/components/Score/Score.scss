@@ -1,10 +1,11 @@
+@import '../../styles/mixins/frames.scss';
+
 .score-style{
-  // background-color: tan;
   grid-area: score;
   color: #21FF06;
-  border-color:#21FF06;
-  border-style: solid;
-  border-radius: 30px;
+
+  @include frame;
+
 
   display: flex;
   flex-direction: column;
