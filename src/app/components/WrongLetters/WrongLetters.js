@@ -1,4 +1,3 @@
-// import './word.scss';
 import React from 'react';
 import "./WrongLetters.scss"
 

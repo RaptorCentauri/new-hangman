@@ -3,11 +3,23 @@
 .playWord{
   grid-area: word;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #21FF06;
-  font-size: 6em;
-  letter-spacing: 0.08em;
+
+  h1{
+    color: #21FF06;
+    font-size: 6em;
+    letter-spacing: 0.08em;
+  }
+
+  h6{
+    color: #21FF06;
+    font-size: 3em;
+    // letter-spacing: 0.08em;
+  }
+
+
 
   @include frame;
 

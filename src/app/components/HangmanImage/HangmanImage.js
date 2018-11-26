@@ -1,4 +1,3 @@
-// import './word.scss';
 import React from 'react';
 import "./HangmanImage.scss"
 
@@ -11,8 +10,6 @@ const HangmanImage = (props) =>
   {props.lives <= 1  ? <div id="left-leg"></div> : null}
   {props.lives <= 0  ? <div id="right-leg"></div> : null}
 </div>
-
-
 
 
 export default HangmanImage
